@@ -1,11 +1,22 @@
-import React from 'react'
+import React from "react";
+import Sidebar from "../../components/sidebar/Sidebar";
+import MovieList from "../../components/MovieList/MovieList";
+import './Home.css';
 
 function Home() {
+
+
   return (
-    <>
-      <h1>This is My Home Page</h1>
-    </>
-  )
+    <div className="home-container">
+      {/* Sidebar */}
+      <Sidebar />
+
+      {/* MovieList */}
+      <div className="content">
+        <MovieList />
+      </div>
+    </div>
+  );
 }
 
-export default Home
+export default Home;

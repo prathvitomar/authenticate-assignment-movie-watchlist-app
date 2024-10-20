@@ -1,10 +1,75 @@
-// ../../public/images/movie-watchlist-icon.ico
+// import React, { useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import './Navbar.css';
 
-import React from 'react';
+// const Navbar = () => {
+
+//   const [searchValue, setSearchValue] = useState("");
+
+//   return (
+//     <nav className="navbar">
+//       <div className="navbar-container">
+//         <Link to="/" className="logo">
+//           <img src="../../public/images/movie-watchlist-icon.ico" alt="Logo" className="logo-img" />
+//         </Link>
+//         <div className="search-bar">
+//           <div className="search-container">
+//             <input
+//               type="text"
+//               className="search-input"
+//               placeholder="Enter your Favorite Movie"
+//               onChange={(e)=> setSearchValue(e.target.value)}
+//             />
+//           </div>
+//         </div>
+//         <div className="navbar-links">
+//           <Link to="/" className="nav-link">Home</Link>
+//           <Link to="/watch-list" className="nav-link">My WatchList</Link>
+//         </div>
+//       </div>
+//     </nav>
+//   );
+// };
+
+// export default Navbar;
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import { useDispatch } from 'react-redux';
+import { fetchMovies } from '../../features/movies/moviesSlice';  // Adjust the import as needed
 
 const Navbar = () => {
+  const [searchValue, setSearchValue] = useState("");
+  const dispatch = useDispatch();
+
+  // Function to handle search
+  const handleSearch = () => {
+    if (searchValue.trim()) {
+      dispatch(fetchMovies(searchValue));  // Dispatch the action with the input value
+      setSearchValue("");  // Optionally reset the search value after dispatch
+    }
+  };
+
+  // Function to handle 'Enter' key press
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();  // Call handleSearch on 'Enter'
+    }
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -13,23 +78,20 @@ const Navbar = () => {
         </Link>
         <div className="search-bar">
           <div className="search-container">
-            <span className="search-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" className="search-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M11 4a7 7 0 100 14 7 7 0 000-14zm0 0l6 6" />
-              </svg>
-            </span>
             <input
               type="text"
               className="search-input"
-              placeholder="Search"
+              placeholder="Enter your Favorite Movie"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}  // Update state on change
+              onKeyDown={handleKeyDown}  // Call handleKeyDown on key press
             />
+            <button className="search-button" onClick={handleSearch}>🔍</button> {/* Search button */}
           </div>
         </div>
         <div className="navbar-links">
           <Link to="/" className="nav-link">Home</Link>
-          <Link to="/blog" className="nav-link">Blog</Link>
-          <Link to="/components" className="nav-link">Components</Link>
-          <Link to="/courses" className="nav-link">Courses</Link>
+          <Link to="/watch-list" className="nav-link">My WatchList</Link>
         </div>
       </div>
     </nav>
@@ -37,4 +99,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
