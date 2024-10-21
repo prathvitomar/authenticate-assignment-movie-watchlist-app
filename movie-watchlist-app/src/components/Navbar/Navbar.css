@@ -1,6 +1,9 @@
 .navbar {
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky; /* or use fixed */
+    top: 0; /* Set to 0 to stick to the top */
+    z-index: 1000;
   }
   
   .navbar-container {

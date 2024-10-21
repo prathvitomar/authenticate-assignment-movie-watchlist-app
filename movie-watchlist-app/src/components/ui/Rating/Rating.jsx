@@ -20,7 +20,7 @@ function Rating({ ratings }) {
   // Dynamically map through ratings data
   return (
     <>
-      <div className="flex items-center mb-5">
+      <div className="flex items-center mb-5 rajdhani-light">
         <p className="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-blue-200 dark:text-blue-800">
           {ratings[0]?.Value || "N/A"} {/* Assuming the first rating is IMDb */}
         </p>
@@ -36,17 +36,17 @@ function Rating({ ratings }) {
       <div className="gap-4 sm:grid sm:grid-cols-2">
         {ratings.map((rating, index) => (
           <dl key={index}>
-            <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            <dt className="rajdhani-bold text-sm font-medium text-gray-500 dark:text-gray-400">
               {rating.Source}
             </dt>
             <dd className="flex items-center mb-3">
               <div className="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 me-2">
                 <div
-                  className="bg-blue-600 h-2.5 rounded dark:bg-blue-500"
+                  className=" bg-blue-600 h-2.5 rounded dark:bg-blue-500"
                   style={{ width: getRatingPercentage(rating.Value) }} // Dynamically calculate width based on rating
                 ></div>
               </div>
-              <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+              <span className="rajdhani-bold text-sm font-medium text-gray-500 dark:text-gray-400">
                 {rating.Value}
               </span>
             </dd>

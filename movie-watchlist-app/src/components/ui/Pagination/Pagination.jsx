@@ -7,7 +7,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
   }
 
   return (
-    <div className="w-full bg-white dark:bg-gray-800">
+    <div className="w-full bg-white dark:bg-gray-800 rajdhani-bold">
       <div className="container flex flex-col items-center px-6 py-5 mx-auto space-y-6 sm:flex-row sm:justify-between sm:space-y-0">
         <div className="-mx-2">
           {pageNumbers.map((pageNumber) => (

@@ -89,3 +89,7 @@ body {
     display: block;
   }
   
+
+  .text-white-outline {
+    text-shadow: 3px 3px 0px white;
+  }

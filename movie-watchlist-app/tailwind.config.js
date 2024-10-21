@@ -9,7 +9,8 @@ export default {
   // },
   theme: {
     fontFamily: {
-      sans: ["Open Sans", "sans-serif"],
+      rajdhani: ['Rajdhani', 'sans-serif'],
+      agdasima: ['Agdasima', 'sans-serif'],
     },
   },
   plugins: [],

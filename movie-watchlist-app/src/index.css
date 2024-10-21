@@ -1,3 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* global.css */
+.rajdhani-light {
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 300;
+  }
+  
+  .rajdhani-regular {
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 400;
+  }
+  
+  .rajdhani-medium {
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 500;
+  }
+  
+  .rajdhani-semibold {
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 600;
+  }
+  
+  .rajdhani-bold {
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 700;
+  }
+
+  .rajdhani-superbold {
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 900;
+  }
+  
+  .agdasima-regular {
+    font-family: "Agdasima", sans-serif;
+    font-weight: 400;
+  }
+  
+  .agdasima-bold {
+    font-family: "Agdasima", sans-serif;
+    font-weight: 700;
+  }
+  
