@@ -38,10 +38,10 @@ function MovieCard({ movie }) {
       />
 
       <div className="movie-card-footer">
-          <button className="movie-card-button"
+          <button className="movie-card-button text-white bg-gray-800 hover:bg-purple-700 rajdhani-semibold"
           onClick={()=> navigateToMovieDetails(movie.imdbID)}>Click to See Details</button>
         <button 
-        className="movie-card-button"
+        className="movie-card-button bg-gray-800 text-white hover:bg-purple-700 rajdhani-semibold"
         onClick={addHandler}
         >Add to Watchlist
         </button>

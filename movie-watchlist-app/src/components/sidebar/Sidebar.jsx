@@ -7,6 +7,13 @@ function Sidebar() {
   const activeUser = JSON.parse(localStorage.getItem("activeUser"));
   const email = activeUser?.email;
 
+  function getFirstNameFromEmail(email) {
+    let namePart = email.split('@')[0];
+    let firstName = namePart.replace(/[^a-zA-Z]/g, '');
+    firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+    return firstName;
+  }
+  let firstName = getFirstNameFromEmail(email);
   const handleLogout = () => {
     localStorage.removeItem("activeUser");
     navigate("/login");
@@ -20,7 +27,7 @@ function Sidebar() {
             <div className="mx-3 flex flex-col justify-between">
               <h1 className="text-3xl rajdhani-bold">Welcome..!!!!!!</h1>
               <span className=" text-xl font-medium text-gray-700 dark:text-gray-200">
-                {email}
+                {firstName}
               </span>
             </div>
 

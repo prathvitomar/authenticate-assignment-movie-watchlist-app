@@ -91,5 +91,10 @@ body {
   
 
   .text-white-outline {
-    text-shadow: 3px 3px 0px white;
+    text-shadow: 2px 2px 0px white;
+  }
+
+  .text-black-outline{
+    text-shadow: 2px 2px 0px black;
+    
   }

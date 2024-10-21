@@ -3,23 +3,44 @@ import { useParams } from "react-router-dom";
 import Rating from "../ui/Rating/Rating";
 import Loading from "../ui/Loading/Loading";
 import { useDispatch, useSelector } from "react-redux";
-import { getSelectedMovie, getMoviesStatus, fetchMovieById } from "../../features/movies/moviesSlice";
+import {
+  getSelectedMovie,
+  getMoviesStatus,
+  fetchMovieById,
+} from "../../features/movies/moviesSlice";
+import {
+  addToWatchlist,
+  removeFromWatchlist,
+  selectWatchlist,
+} from "../../features/users/userSlice";
 
 function MovieDetails() {
   const { movieId } = useParams();
   const dispatch = useDispatch();
   const movieData = useSelector(getSelectedMovie);
   const status = useSelector(getMoviesStatus);
+  const watchlist = useSelector(selectWatchlist); // Use the selector to get watchlist
 
   useEffect(() => {
     if (movieId) {
-      dispatch(fetchMovieById(movieId));  // Fetch movie details by ID
+      dispatch(fetchMovieById(movieId)); // Fetch movie details by ID
     }
   }, [movieId, dispatch]);
 
   if (status === "loading" || !movieData) {
-    return <Loading/>;
+    return <Loading />;
   }
+
+  // Check if the movie is in the watchlist
+  const isInWatchlist = watchlist.some(movie => movie.imdbID === movieData.imdbID);
+
+  const handleWatchlistToggle = () => {
+    if (isInWatchlist) {
+      dispatch(removeFromWatchlist(movieData.imdbID)); // Remove from watchlist
+    } else {
+      dispatch(addToWatchlist(movieData)); // Add to watchlist
+    }
+  };
 
   return (
     <div className="flex h-screen bg-white dark:bg-gray-800 mx-4 rajdhani-bold">
@@ -50,44 +71,60 @@ function MovieDetails() {
         {/* Director, Writer, and Actors */}
         <div className="mt-4">
           <p className="text-sm text-gray-800 dark:text-gray-400">
-            <span className="font-bold">Actors: </span>{movieData.Actors}
+            <span className="font-bold">Actors: </span>
+            {movieData.Actors}
           </p>
           <p className="text-sm text-gray-800 dark:text-gray-400">
-            <span className="font-bold">Director: </span>{movieData.Director}
+            <span className="font-bold">Director: </span>
+            {movieData.Director}
           </p>
           <p className="text-sm text-gray-800 dark:text-gray-400">
-            <span className="font-bold">Released: </span>{movieData.Released}
+            <span className="font-bold">Released: </span>
+            {movieData.Released}
           </p>
           <p className="text-sm text-gray-800 dark:text-gray-400">
-            <span className="font-bold">Writer: </span>{movieData.Writer}
+            <span className="font-bold">Writer: </span>
+            {movieData.Writer}
           </p>
         </div>
 
         {/* Additional Info */}
         <div className="mt-4">
           <p className="text-sm text-gray-800 dark:text-gray-400">
-            <span className="font-bold">Language: </span>{movieData.Language}
+            <span className="font-bold">Language: </span>
+            {movieData.Language}
           </p>
           <p className="text-sm text-gray-800 dark:text-gray-400">
-            <span className="font-bold">Country: </span>{movieData.Country}
+            <span className="font-bold">Country: </span>
+            {movieData.Country}
           </p>
           <p className="text-sm text-gray-800 dark:text-gray-400">
-            <span className="font-bold">Awards: </span>{movieData.Awards}
+            <span className="font-bold">Awards: </span>
+            {movieData.Awards}
           </p>
         </div>
 
         {/* IMDb Ratings and Box Office */}
         <div className="mt-4">
           <p className="text-sm text-gray-800 dark:text-gray-400">
-            <span className="font-bold">IMDB Rating: </span>{movieData.imdbRating} ({movieData.imdbVotes} votes)
+            <span className="font-bold">IMDB Rating: </span>
+            {movieData.imdbRating} ({movieData.imdbVotes} votes)
           </p>
           <p className="text-sm text-gray-800 dark:text-gray-400">
-            <span className="font-bold">Box Office: </span>{movieData.BoxOffice}
+            <span className="font-bold">Box Office: </span>
+            {movieData.BoxOffice}
           </p>
         </div>
 
-                {/* Ratings */}
-                <div className="mt-4">
+        <button
+          onClick={handleWatchlistToggle}
+          className={`mt-4 px-4 py-2 text-white ${isInWatchlist ? 'bg-red-500' : 'bg-blue-500'} rounded`}
+        >
+          {isInWatchlist ? 'Remove from Watchlist' : 'Add to Watchlist'}
+        </button>
+
+        {/* Ratings */}
+        <div className="mt-4">
           <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
             Ratings:
           </h3>
@@ -99,4 +136,3 @@ function MovieDetails() {
 }
 
 export default MovieDetails;
-
