@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -9,9 +9,8 @@ import "./WatchList.css";
 
 function WatchList() {
   const navigate = useNavigate();
-  const myWatchlist = useSelector(selectWatchlist);
-  console.log(myWatchlist);
   const dispatch = useDispatch();
+  const myWatchlist = useSelector(selectWatchlist);
 
   const goToMovieDetails = (id) => {
     navigate(`/${id}`);
@@ -26,15 +25,14 @@ function WatchList() {
       <section className="container px-4 mx-auto rajdhani-bold">
         <div className="flex items-center gap-x-3">
           <h2 className="text-lg font-medium text-gray-800 dark:text-white">
-            My Wishlist
+            My Watchlist
           </h2>
           <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">
             Favorites
           </span>
         </div>
-        {
-          myWatchlist.length > 0 && myWatchlist ? (
-            <div className="flex flex-col mt-6">
+        {myWatchlist.length > 0 ? (
+          <div className="flex flex-col mt-6">
             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                 <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
@@ -49,7 +47,7 @@ function WatchList() {
                             <span>Movie Poster</span>
                           </div>
                         </th>
-  
+
                         <th
                           scope="col"
                           className="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
@@ -58,7 +56,7 @@ function WatchList() {
                             <span>Movie Title</span>
                           </button>
                         </th>
-  
+
                         <th
                           scope="col"
                           className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
@@ -73,7 +71,7 @@ function WatchList() {
                         >
                           Type
                         </th>
-  
+
                         <th scope="col" className="relative py-3.5 px-4">
                           <span className="sr-only">Remove</span>
                         </th>
@@ -81,8 +79,8 @@ function WatchList() {
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                       {myWatchlist.length > 0 && myWatchlist ? (
-                        myWatchlist.map((movie) => (
-                          <tr>
+                        myWatchlist.slice().reverse().map((movie) => (
+                          <tr key={movie.imdbID}>
                             <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                               <div className="inline-flex items-center gap-x-3">
                                 <div className="flex items-center gap-x-2">
@@ -136,7 +134,7 @@ function WatchList() {
                                     />
                                   </svg>
                                 </button>
-  
+
                                 <button
                                   onClick={() => goToMovieDetails(movie.imdbID)}
                                   className="text-gray-500 transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none"
@@ -168,7 +166,6 @@ function WatchList() {
                       ) : (
                         <tr>
                           <td>
-                            {/* <h1 className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">You don't have anything in your Watchlist</h1> */}
                             <div className="no-movies-message">
                               <div>
                                 <h1 className="text-2xl font-bold flex items-center">
@@ -197,28 +194,15 @@ function WatchList() {
               </div>
             </div>
           </div>
-          ) : (
-            <div className="no-movies-message">
+        ) : (
+          <div className="no-movies-message">
             <div>
               <h1 className="text-2xl font-bold flex items-center">
-                You don't have anything in your Watchlist.
-                <svg
-                  stroke="currentColor"
-                  fill="currentColor"
-                  strokeWidth="0"
-                  viewBox="0 0 24 24"
-                  className="animate-spin"
-                  height="1.5em"
-                  width="1.5em"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2ZM13.6695 15.9999H10.3295L8.95053 17.8969L9.5044 19.6031C10.2897 19.8607 11.1286 20 12 20C12.8714 20 13.7103 19.8607 14.4956 19.6031L15.0485 17.8969L13.6695 15.9999ZM5.29354 10.8719L4.00222 11.8095L4 12C4 13.7297 4.54894 15.3312 5.4821 16.6397L7.39254 16.6399L8.71453 14.8199L7.68654 11.6499L5.29354 10.8719ZM18.7055 10.8719L16.3125 11.6499L15.2845 14.8199L16.6065 16.6399L18.5179 16.6397C19.4511 15.3312 20 13.7297 20 12L19.997 11.81L18.7055 10.8719ZM12 9.536L9.656 11.238L10.552 14H13.447L14.343 11.238L12 9.536ZM14.2914 4.33299L12.9995 5.27293V7.78993L15.6935 9.74693L17.9325 9.01993L18.4867 7.3168C17.467 5.90685 15.9988 4.84254 14.2914 4.33299ZM9.70757 4.33329C8.00021 4.84307 6.53216 5.90762 5.51261 7.31778L6.06653 9.01993L8.30554 9.74693L10.9995 7.78993V5.27293L9.70757 4.33329Z"></path>
-                </svg>
+                Watchlist is Empty, Still haven't added anything to your watchlist? Even Netflix has given up on you.
               </h1>
             </div>
           </div>
-          )
-        }
+        )}
       </section>
     </>
   );

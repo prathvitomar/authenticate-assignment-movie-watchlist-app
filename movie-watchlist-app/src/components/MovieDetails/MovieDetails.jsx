@@ -19,11 +19,11 @@ function MovieDetails() {
   const dispatch = useDispatch();
   const movieData = useSelector(getSelectedMovie);
   const status = useSelector(getMoviesStatus);
-  const watchlist = useSelector(selectWatchlist); // Use the selector to get watchlist
+  const watchlist = useSelector(selectWatchlist);
 
   useEffect(() => {
     if (movieId) {
-      dispatch(fetchMovieById(movieId)); // Fetch movie details by ID
+      dispatch(fetchMovieById(movieId));
     }
   }, [movieId, dispatch]);
 
@@ -31,31 +31,34 @@ function MovieDetails() {
     return <Loading />;
   }
 
-  // Check if the movie is in the watchlist
-  const isInWatchlist = watchlist.some(movie => movie.imdbID === movieData.imdbID);
+  const isInWatchlist = watchlist.some(
+    (movie) => movie.imdbID === movieData.imdbID
+  );
 
   const handleWatchlistToggle = () => {
     if (isInWatchlist) {
-      dispatch(removeFromWatchlist(movieData.imdbID)); // Remove from watchlist
+      dispatch(removeFromWatchlist(movieData.imdbID));
     } else {
-      dispatch(addToWatchlist(movieData)); // Add to watchlist
+      dispatch(addToWatchlist(movieData));
     }
   };
 
   return (
-    <div className="flex h-screen bg-white dark:bg-gray-800 mx-4 rajdhani-bold">
-      {/* Left Side - Image (40% width) */}
+    <>
+    <div className="flex h-screen bg-white dark:bg-gray-800 mx-4 rajdhani-bold border-gray-500">
       <div className="w-2/5">
         <img
           className="object-cover w-full h-full"
-          src={movieData.Poster}
+          src={
+            movieData.Poster === "N/A" || !movieData.Poster
+              ? "../../public/images/photo_not_available.jpg"
+              : movieData.Poster
+          }
           alt={movieData.Title}
         />
       </div>
 
-      {/* Right Side - Details (60% width) */}
       <div className="w-3/5 p-6">
-        {/* Title and Basic Info */}
         <div>
           <span className="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">
             {movieData.Genre}
@@ -68,7 +71,6 @@ function MovieDetails() {
           </p>
         </div>
 
-        {/* Director, Writer, and Actors */}
         <div className="mt-4">
           <p className="text-sm text-gray-800 dark:text-gray-400">
             <span className="font-bold">Actors: </span>
@@ -88,7 +90,6 @@ function MovieDetails() {
           </p>
         </div>
 
-        {/* Additional Info */}
         <div className="mt-4">
           <p className="text-sm text-gray-800 dark:text-gray-400">
             <span className="font-bold">Language: </span>
@@ -104,7 +105,6 @@ function MovieDetails() {
           </p>
         </div>
 
-        {/* IMDb Ratings and Box Office */}
         <div className="mt-4">
           <p className="text-sm text-gray-800 dark:text-gray-400">
             <span className="font-bold">IMDB Rating: </span>
@@ -118,12 +118,13 @@ function MovieDetails() {
 
         <button
           onClick={handleWatchlistToggle}
-          className={`mt-4 px-4 py-2 text-white ${isInWatchlist ? 'bg-red-500' : 'bg-blue-500'} rounded`}
+          className={`mt-4 px-4 py-2 text-white ${
+            isInWatchlist ? "bg-red-500" : "bg-blue-500"
+          } rounded`}
         >
-          {isInWatchlist ? 'Remove from Watchlist' : 'Add to Watchlist'}
+          {isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
         </button>
 
-        {/* Ratings */}
         <div className="mt-4">
           <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
             Ratings:
@@ -132,6 +133,7 @@ function MovieDetails() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

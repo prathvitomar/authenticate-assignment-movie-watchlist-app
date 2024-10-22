@@ -63,12 +63,3 @@
   border-radius: 0.25rem;
   transition: background-color 0.3s ease-in-out;
 }
-
-.movie-card-button:hover {
-  background-color: #edf2f7;
-}
-
-.movie-card-button:focus {
-  background-color: #cbd5e0;
-  outline: none;
-}

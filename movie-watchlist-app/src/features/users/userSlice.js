@@ -26,8 +26,9 @@ const userSlice = createSlice({
       localStorage.setItem('activeUser', JSON.stringify(user));
     },
     logout: (state) => {
-      localStorage.removeItem('activeUser'); // Clear active user from localStorage
+      localStorage.removeItem('activeUser');
       state.email = null;
+      state.activeUser = null; 
       state.isAuthenticated = false;
     },
     restoreUser: (state) => {
@@ -39,13 +40,11 @@ const userSlice = createSlice({
         if (!state.activeUser.watchlist.some(movie => movie.imdbID === movieToAdd.imdbID)) {
           state.activeUser.watchlist.push(movieToAdd);
     
-          // Update the users array with the new activeUser watchlist
           const userIndex = state.users.findIndex(user => user.email === state.activeUser.email);
           if (userIndex !== -1) {
-            state.users[userIndex] = state.activeUser;  // Update the user in the users array
+            state.users[userIndex] = state.activeUser;
           }
     
-          // Save the updated users array and activeUser to localStorage
           localStorage.setItem('users', JSON.stringify(state.users));
           localStorage.setItem('activeUser', JSON.stringify(state.activeUser));
         }
@@ -56,13 +55,11 @@ const userSlice = createSlice({
       if (state.activeUser) {
         state.activeUser.watchlist = state.activeUser.watchlist.filter(movie => movie.imdbID !== action.payload);
     
-        // Update the users array with the new activeUser watchlist
         const userIndex = state.users.findIndex(user => user.email === state.activeUser.email);
         if (userIndex !== -1) {
-          state.users[userIndex] = state.activeUser;  // Update the user in the users array
+          state.users[userIndex] = state.activeUser;
         }
     
-        // Save the updated users array and activeUser to localStorage
         localStorage.setItem('users', JSON.stringify(state.users));
         localStorage.setItem('activeUser', JSON.stringify(state.activeUser));
       }

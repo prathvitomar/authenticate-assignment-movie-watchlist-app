@@ -52,9 +52,9 @@ function Sidebar() {
               <span className="mx-2 text-sm font-medium">Home</span>
             </button>
 
-            <button
+            <a
               className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-              onClick={() => navigate("/watch-list")}
+              href="/watch-list"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +71,7 @@ function Sidebar() {
                 />
               </svg>
               <span className="mx-2 text-sm font-medium">Watchlist</span>
-            </button>
+            </a>
             <button
               onClick={handleLogout}
               className="flex items-center px-3 text-gray-600 transition-colors duration-200 dark:text-gray-400 rtl:rotate-0 hover:text-blue-500 dark:hover:text-blue-400"

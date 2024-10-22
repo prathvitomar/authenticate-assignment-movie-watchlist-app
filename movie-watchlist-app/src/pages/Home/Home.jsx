@@ -1,17 +1,12 @@
 import React from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import MovieList from "../../components/MovieList/MovieList";
-import './Home.css';
+import "./Home.css";
 
 function Home() {
-
-
   return (
     <div className="home-container">
-      {/* Sidebar */}
       <Sidebar />
-
-      {/* MovieList */}
       <div className="content">
         <MovieList />
       </div>

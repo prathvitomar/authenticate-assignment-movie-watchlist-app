@@ -10,9 +10,9 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const handleLogin = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     if (email) {
-      dispatch(loginUser(email)); 
+      dispatch(loginUser(email));
       navigate("/home");
     } else {
       alert("Please enter a valid email address");
@@ -33,7 +33,9 @@ const Login = () => {
     >
       <div className="flex-col flex self-center text-black-300 mx-4">
         <h1 className="my-3 font-bold text-5xl text-white-outline">Welcome</h1>
-        <p className="pr-6 font-bold text-white text-black-outline opacity-95">Cinema at Your Fingertips,Your Personal Movie Library Awaits You.</p>
+        <p className="pr-6 font-bold text-white text-black-outline opacity-95">
+          Cinema at Your Fingertips,Your Personal Movie Library Awaits You.
+        </p>
       </div>
 
       <div className="flex justify-center self-center z-10 mx-4">

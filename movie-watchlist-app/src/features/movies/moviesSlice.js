@@ -13,7 +13,7 @@ const initialState = {
 export const fetchMovies = createAsyncThunk(
   "movies/fetchMovies",
   async (searchTerm = "") => {
-    const MOVIES_API = `https://omdbapi.com/?apikey=${conf.moviesApiKey}&s=${searchTerm}&p=1`;
+    const MOVIES_API = `https://omdbapi.com/?apikey=${conf.moviesApiKey}&s=${searchTerm}&page=1`;
     const response = await axios.get(MOVIES_API);
     return response.data.Search;
   }
@@ -32,7 +32,7 @@ const moviesSlice = createSlice({
   initialState,
   reducers: {
     setSearchQuery: (state, action) => {
-      state.searchQuery = action.payload;  // Update searchQuery
+      state.searchQuery = action.payload;
     },
   },
   extraReducers(builder) {
@@ -67,5 +67,6 @@ export const getAllMovies = (state) => state.movies.movies;
 export const getMoviesStatus = (state) => state.movies.status;
 export const getMoviesError = (state) => state.movies.error;
 export const getSelectedMovie = (state) => state.movies.selectedMovie;
+export const getSearchQuery = (state) => state.movies.searchQuery;
 
 export default moviesSlice.reducer;

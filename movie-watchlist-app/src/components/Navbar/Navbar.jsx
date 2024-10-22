@@ -2,33 +2,32 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { useDispatch } from "react-redux";
-import { fetchMovies } from "../../features/movies/moviesSlice"; // Adjust the import as needed
+import { fetchMovies, setSearchQuery} from "../../features/movies/moviesSlice"; // Adjust the import as needed
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
   const activeUser = JSON.parse(localStorage.getItem("activeUser"));
-  const email = activeUser?.email;
 
   const handleLogout = () => {
     localStorage.removeItem("activeUser");
     navigate("/login");
   };
 
-  // Function to handle search
   const handleSearch = (e) => {
-    e.preventDefault();  // Prevent default form behavior
+    e.preventDefault(); 
     if (searchValue.trim()) {
-      dispatch(fetchMovies(searchValue)); // Dispatch the action to search movies
-      setSearchValue(""); // Optionally reset the search field
+      dispatch(fetchMovies(searchValue)); 
+      dispatch(setSearchQuery(searchValue));
+      setSearchValue(""); 
     }
   };
 
-  // Function to handle 'Enter' key press
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      handleSearch(); // Call handleSearch on 'Enter'
+      navigate("/home");
+      handleSearch(); 
     }
   };
 
@@ -42,19 +41,21 @@ const Navbar = () => {
             className="logo-img"
           />
         </Link>
-        <form className="flex items-center max-w-sm mx-auto" onSubmit={handleSearch}>
+        <form
+          className="flex items-center max-w-sm mx-auto"
+          onSubmit={handleSearch}
+        >
           <label htmlFor="simple-search" className="sr-only">
             Search
           </label>
           <div className="relative w-full">
-            <input 
+            <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              // required
               type="text"
               placeholder="Enter your Favorite Movie"
               value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}  
-              onKeyDown={handleKeyDown} 
+              onChange={(e) => setSearchValue(e.target.value)}
+              onKeyDown={handleKeyDown}
             />
           </div>
           <button
@@ -83,11 +84,14 @@ const Navbar = () => {
           <Link to="/home" className="nav-link rajdhani-bold">
             Home
           </Link>
-          <Link to="/watch-list" className="nav-link rajdhani-bold">
+          <a
+            href="/watch-list"
+            className="nav-link rajdhani-bold"
+          >
             My WatchList
-          </Link>
+          </a>
           <Link to="/login" className="nav-link rajdhani-bold">
-          <button
+            <button
               onClick={handleLogout}
               className="flex items-center text-gray-700 transition-colors duration-200 dark:text-gray-400 rtl:rotate-0 hover:text-blue-500 dark:hover:text-blue-400"
             >

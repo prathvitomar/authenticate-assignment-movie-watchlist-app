@@ -18,8 +18,8 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
     },
     restoreAuth: (state, action) => {
-      state.email = action.payload.email; // Restore the email from the payload
-      state.isAuthenticated = true; // Set authentication to true
+      state.email = action.payload.email; 
+      state.isAuthenticated = true;
     },
   },
 });

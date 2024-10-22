@@ -5,20 +5,20 @@
   .input-label {
     display: block;
     margin-bottom: 8px;
-    font-size: 0.875rem; /* Tailwind's text-sm */
-    color: #4A5568; /* Tailwind's gray-600 */
+    font-size: 0.875rem; 
+    color: #4A5568;
   }
   
   .input-field {
     width: 100%;
     padding: 10px;
-    border: 1px solid #E2E8F0; /* Tailwind's gray-300 */
-    border-radius: 0.375rem; /* Tailwind's rounded-lg */
+    border: 1px solid #E2E8F0; 
+    border-radius: 0.375rem; 
     transition: border-color 0.3s;
   }
   
   .input-field:focus {
-    border-color: #63B3ED; /* Tailwind's blue-400 */
+    border-color: #63B3ED;
     outline: none;
   }
   

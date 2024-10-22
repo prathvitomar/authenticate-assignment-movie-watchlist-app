@@ -11,31 +11,6 @@ import { Provider } from 'react-redux'
 import store from './app/store/store.js'
 import PrivateRoute from './features/ProtectedRoute/ProtectedRoute.jsx'
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <App />,
-//     children: [
-//       {
-//         path: "",
-//         element: <Home />,
-//       },
-//       {
-//         path: "watch-list",
-//         element: <WatchList />,
-//       },
-//       {
-//         path: ":movieId",
-//         element: <MovieDetails />,
-//       }
-//     ],
-//   },   
-//   {
-//     path: "login",
-//     element: <Login />,
-//   },
-// ]);
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -43,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <Navigate to="/login" />, // Redirect the default route to login
+        element: <Navigate to="/login" />,
       },
       {
         path: 'home',
@@ -78,9 +53,7 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  </StrictMode>,
 )

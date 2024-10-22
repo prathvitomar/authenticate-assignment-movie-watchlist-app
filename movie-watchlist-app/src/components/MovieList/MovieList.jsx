@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "../MovieCard/MovieCard";
-import Pagination from "../ui/Pagination/Pagination";
 import Loading from "../ui/Loading/Loading";
 import "./MovieList.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,9 +16,8 @@ function MovieList() {
   const movies = useSelector(getAllMovies) || [];
   const movieStatus = useSelector(getMoviesStatus);
   const error = useSelector(getMoviesError);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [moviesPerPage] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
+  console.log(JSON.stringify(movies, null, 2)); 
 
   useEffect(() => {
     if (movieStatus === "idle" || searchQuery !== "") {
@@ -31,16 +29,8 @@ function MovieList() {
   if (movieStatus === "loading") {
     content = <Loading />;
   } else if (movieStatus === "failed") {
-    content = <Error errorMessage={error} />;
+    content = <Error errorMessage={error} />
   }
-
-  const totalResults = parseInt(movies.length) || 0;
-  const totalPages = Math.ceil(totalResults / moviesPerPage);
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-    dispatch(fetchMovies(searchQuery));
-  };
 
   return (
     <>
@@ -75,14 +65,9 @@ function MovieList() {
               </div>
             )}
           </div>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
         </>
       ) : (
-        <div className="movie-list">{content}</div>
+        <div className="load-error">{content}</div>
       )}
     </>
   );

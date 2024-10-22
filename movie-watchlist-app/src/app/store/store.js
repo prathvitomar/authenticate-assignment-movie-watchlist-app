@@ -19,7 +19,7 @@ const store = configureStore({
         },
         auth: {
           email: persistedEmail,
-          isAuthenticated: !!persistedEmail, // true if email exists
+          isAuthenticated: !!persistedEmail,
         },
       },
 })
