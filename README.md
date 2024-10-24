@@ -1,6 +1,6 @@
 🎬 Movie Watchlist App 🎥
 
-🚀 Deployed on 👉: authenticate-assignment-movie-watchlist-app.vercel.app
+🚀 Deployed on 👉: https://authenticate-assignment-movie-watchlist-app.vercel.app
 
 📖 Overview
 The Movie Watchlist App is a fun and engaging application that allows users to search for their favorite movies, view detailed information, and create personalized watchlists. With seamless login support and the ability to manage multiple accounts and watchlists, this app is your one-stop shop for movie tracking!
