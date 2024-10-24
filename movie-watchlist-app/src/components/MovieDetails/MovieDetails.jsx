@@ -51,7 +51,7 @@ function MovieDetails() {
           className="object-cover w-full h-full"
           src={
             movieData.Poster === "N/A" || !movieData.Poster
-              ? "../../public/images/photo_not_available.jpg"
+              ? "/images/photo_not_available.jpg"
               : movieData.Poster
           }
           alt={movieData.Title}

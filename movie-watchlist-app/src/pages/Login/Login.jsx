@@ -24,7 +24,7 @@ const Login = () => {
       className="relative min-h-screen sm:flex sm:flex-row justify-center bg-transparent
      shadow-xl rajdhani-bold"
       style={{
-        backgroundImage: "url('../../public/images/login-background.jpg')",
+        backgroundImage: "url('/images/login-background.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

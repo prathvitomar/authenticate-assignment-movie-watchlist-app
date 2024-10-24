@@ -25,7 +25,7 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <a href="/">
-            <img className="footer-logo" src="../../public/images/movie-watchlist-icon.ico" alt="logo" />
+            <img className="footer-logo" src="/images/movie-watchlist-icon.ico" alt="logo" />
           </a>
           <p className="footer-copyright">
             © Copyright 2024. All Rights Reserved to Prathvi Singh Tomar.

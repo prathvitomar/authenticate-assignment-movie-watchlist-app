@@ -36,7 +36,7 @@ const Navbar = () => {
       <div className="navbar-container">
         <Link to="/home" className="logo">
           <img
-            src="../../public/images/movie-watchlist-icon.ico"
+            src="/images/movie-watchlist-icon.ico"
             alt="Logo"
             className="logo-img"
           />

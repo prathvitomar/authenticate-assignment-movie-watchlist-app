@@ -32,7 +32,7 @@ function MovieCard({ movie }) {
       </div>
       <img
         className="movie-card-img"
-        src={movie.Poster === "N/A" || !movie.Poster ? "../../public/images/photo_not_available.jpg" : movie.Poster} 
+        src={movie.Poster === "N/A" || !movie.Poster ? "/images/photo_not_available.jpg" : movie.Poster} 
         alt={`${movie.Title} Poster`}
       />
 
