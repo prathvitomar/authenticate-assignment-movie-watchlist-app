@@ -8,7 +8,7 @@ import {
   getAllMovies,
   getMoviesStatus,
   getMoviesError,
-  getSearchQuery
+  getSearchQuery,
 } from "../../features/movies/moviesSlice";
 import Error from "../ui/Error/Error";
 import ShowMessage from "../ui/ShowMessage/ShowMessage";
@@ -19,14 +19,23 @@ function MovieList() {
   const movies = useSelector(getAllMovies) || [];
   const movieStatus = useSelector(getMoviesStatus);
   const error = useSelector(getMoviesError);
-  console.log(JSON.stringify(movies, null, 2));
-
   const searchQuery = useSelector(getSearchQuery);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalResults = movies.totalResults ? parseInt(movies.totalResults, 10) : 0;
+  const totalResults = movies.totalResults
+    ? parseInt(movies.totalResults, 10)
+    : 0;
   const totalPages = movies.totalResults
-  ? Math.ceil(movies.totalResults / 10)
-  : 1;
+    ? Math.ceil(movies.totalResults / 10)
+    : 1;
+
+  useEffect(() => {
+    setImagesLoaded(false);
+  }, [movies]);
+
+  const handleImageLoad = () => {
+    setImagesLoaded(true);
+  };
 
   useEffect(() => {
     dispatch(fetchMovies(searchQuery, currentPage));
@@ -56,7 +65,7 @@ function MovieList() {
             {movies.Search && movies.Search.length > 0 ? (
               movies.Search.map((movie) => (
                 <div className="movie-card" key={movie.imdbID}>
-                  <MovieCard movie={movie} />
+                  <MovieCard movie={movie} onImageLoad={handleImageLoad}/>
                 </div>
               ))
             ) : (
@@ -69,10 +78,10 @@ function MovieList() {
       )}
       <div>
         <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        setCurrentPage={setCurrentPage}
-        totalResults={totalResults}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
+          totalResults={totalResults}
         />
       </div>
     </>

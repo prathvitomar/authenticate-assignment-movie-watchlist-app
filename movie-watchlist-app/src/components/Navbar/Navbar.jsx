@@ -15,14 +15,6 @@ const Navbar = () => {
     navigate("/login");
   };
 
-  // const handleSearch = (e) => {
-  //   e.preventDefault(); 
-  //   if (searchValue.trim()) {
-  //     dispatch(fetchMovies(searchValue)); 
-  //     dispatch(searchQuery(searchValue))
-  //   }
-  // };
-
   const handleSearch = (e) => {
     e.preventDefault(); 
     if (searchValue.trim()) {
