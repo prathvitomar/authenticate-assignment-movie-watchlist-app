@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import { useDispatch } from "react-redux";
-import { fetchMovies, setSearchQuery} from "../../features/movies/moviesSlice"; // Adjust the import as needed
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMovies, setSearchQuery, setPage} from "../../features/movies/moviesSlice"; // Adjust the import as needed
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -15,12 +15,21 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  // const handleSearch = (e) => {
+  //   e.preventDefault(); 
+  //   if (searchValue.trim()) {
+  //     dispatch(fetchMovies(searchValue)); 
+  //     dispatch(searchQuery(searchValue))
+  //   }
+  // };
+
   const handleSearch = (e) => {
     e.preventDefault(); 
     if (searchValue.trim()) {
-      dispatch(fetchMovies(searchValue)); 
       dispatch(setSearchQuery(searchValue));
-      setSearchValue(""); 
+      dispatch(setPage(1));
+      dispatch(fetchMovies());
+      navigate("/home");
     }
   };
 
