@@ -13,6 +13,7 @@ import {
 import Error from "../ui/Error/Error";
 import ShowMessage from "../ui/ShowMessage/ShowMessage";
 import Pagination from "../Pagination/Pagination";
+// import useTheme from "../../features/useTheme/Theme";
 
 function MovieList() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function MovieList() {
   const movieStatus = useSelector(getMoviesStatus);
   const error = useSelector(getMoviesError);
   const searchQuery = useSelector(getSearchQuery);
+  // const { mode } = useTheme()
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const totalResults = movies.totalResults
@@ -61,7 +63,7 @@ function MovieList() {
     <>
       {movieStatus === "succeeded" && movies.Search ? (
         <>
-          <div className="movie-list">
+          <div className={`movie-list`}>
             {movies.Search && movies.Search.length > 0 ? (
               movies.Search.map((movie) => (
                 <div className="movie-card" key={movie.imdbID}>

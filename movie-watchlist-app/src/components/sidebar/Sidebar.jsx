@@ -25,7 +25,7 @@ function Sidebar() {
         <div className="flex flex-col flex-1">
           <nav className="space-y-3 ">
             <div className="mx-3 flex flex-col justify-between">
-              <h1 className="text-3xl rajdhani-bold">Welcome..!!!!!!</h1>
+              <h1 className=" text-3xl font-medium text-gray-700 dark:text-gray-200">Welcome..!!!!!!</h1>
               <span className=" text-xl font-medium text-gray-700 dark:text-gray-200">
                 {firstName}
               </span>

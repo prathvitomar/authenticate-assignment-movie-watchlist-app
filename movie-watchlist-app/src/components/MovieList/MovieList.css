@@ -1,3 +1,20 @@
+/* Base Movie List Styles */
+.movie-list-container {
+  padding: 20px;
+}
+
+/* Light Theme Styles */
+.movie-list-container.light {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Dark Theme Styles */
+.movie-list-container.dark {
+  background-color: #333;
+  color: #f5f5f5;
+}
+
 .movie-list {
   display: flex;
   flex-wrap: wrap;

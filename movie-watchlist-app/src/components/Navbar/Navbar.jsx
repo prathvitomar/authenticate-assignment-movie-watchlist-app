@@ -3,13 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, setSearchQuery, setPage} from "../../features/movies/moviesSlice"; // Adjust the import as needed
+import ThemeBtn from "../ui/ThemeBtn/ThemeBtn";
+import useTheme from "../../features/useTheme/Theme";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
   const activeUser = JSON.parse(localStorage.getItem("activeUser"));
-
+  const {mode} = useTheme()
   const handleLogout = () => {
     localStorage.removeItem("activeUser");
     navigate("/login");
@@ -33,7 +35,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar rajdhani-bold">
+    <nav className={`navbar rajdhani-bold ${mode}`}>
       <div className="navbar-container">
         <Link to="/home" className="logo">
           <img
@@ -96,7 +98,7 @@ const Navbar = () => {
               onClick={handleLogout}
               className="flex items-center text-gray-700 transition-colors duration-200 dark:text-gray-400 rtl:rotate-0 hover:text-blue-500 dark:hover:text-blue-400"
             >
-              <span className="rajdhani-bold font-medium">Log Out</span>
+              <span className="nav-link rajdhani-bold">Log Out</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -113,6 +115,7 @@ const Navbar = () => {
               </svg>
             </button>
           </Link>
+          {/* <ThemeBtn/> */}
         </div>
       </div>
     </nav>
