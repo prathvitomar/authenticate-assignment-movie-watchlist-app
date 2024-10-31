@@ -13,7 +13,6 @@ import {
 import Error from "../ui/Error/Error";
 import ShowMessage from "../ui/ShowMessage/ShowMessage";
 import Pagination from "../Pagination/Pagination";
-// import useTheme from "../../features/useTheme/Theme";
 
 function MovieList() {
   const dispatch = useDispatch();
@@ -21,7 +20,6 @@ function MovieList() {
   const movieStatus = useSelector(getMoviesStatus);
   const error = useSelector(getMoviesError);
   const searchQuery = useSelector(getSearchQuery);
-  // const { mode } = useTheme()
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const totalResults = movies.totalResults

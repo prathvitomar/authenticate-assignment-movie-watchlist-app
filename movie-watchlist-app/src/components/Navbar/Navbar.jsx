@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMovies, setSearchQuery, setPage} from "../../features/movies/moviesSlice"; // Adjust the import as needed
-import ThemeBtn from "../ui/ThemeBtn/ThemeBtn";
+import { fetchMovies, setSearchQuery, setPage} from "../../features/movies/moviesSlice";
+// import ThemeBtn from "../ui/ThemeBtn/ThemeBtn";
 import useTheme from "../../features/useTheme/Theme";
+import { addSearchHistory } from "../../features/users/userSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
-  const activeUser = JSON.parse(localStorage.getItem("activeUser"));
+  // const activeUser = JSON.parse(localStorage.getItem("activeUser"));
   const {mode} = useTheme()
   const handleLogout = () => {
     localStorage.removeItem("activeUser");
@@ -23,7 +24,9 @@ const Navbar = () => {
       dispatch(setSearchQuery(searchValue));
       dispatch(setPage(1));
       dispatch(fetchMovies());
+      dispatch(addSearchHistory(searchValue));
       navigate("/home");
+      document.activeElement.blur();
     }
   };
 

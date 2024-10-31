@@ -15,7 +15,7 @@ const userSlice = createSlice({
   reducers: {
     login: (state, action) => {
       const email = action.payload;
-      const user = state.users.find(user => user.email === email) || { email, watchlist: [] };
+      const user = state.users.find(user => user.email === email) || { email, watchlist: [], searchHistory: [] };
 
       state.activeUser = user;
       if (!state.users.some(u => u.email === email)) {
@@ -30,6 +30,8 @@ const userSlice = createSlice({
       state.email = null;
       state.activeUser = null; 
       state.isAuthenticated = false;
+      state.watchlist = [],
+      state.searchHistory = [];
     },
     restoreUser: (state) => {
       state.activeUser = activeUserFromStorage;
@@ -50,7 +52,6 @@ const userSlice = createSlice({
         }
       }
     },
-    
     removeFromWatchlist: (state, action) => {
       if (state.activeUser) {
         state.activeUser.watchlist = state.activeUser.watchlist.filter(movie => movie.imdbID !== action.payload);
@@ -64,16 +65,43 @@ const userSlice = createSlice({
         localStorage.setItem('activeUser', JSON.stringify(state.activeUser));
       }
     },
+    addSearchHistory: (state, action) => {
+      if (state.activeUser) {
+        const searchTerm = action.payload;
+        const searchEntry = { term: searchTerm, timestamp: new Date().toISOString() }; 
+        if (!state.activeUser.searchHistory.some(entry => entry.term === searchTerm)) {
+          state.activeUser.searchHistory.push(searchEntry);
+      
+          const userIndex = state.users.findIndex(user => user.email === state.activeUser.email);
+          if (userIndex !== -1) {
+            state.users[userIndex] = state.activeUser;
+          }
     
-    getWatchlist: (state) => {
-      return state.activeUser?.watchlist || [];
+          localStorage.setItem('users', JSON.stringify(state.users));
+          localStorage.setItem('activeUser', JSON.stringify(state.activeUser));
+        }
+      }
+    },
+    clearSearchHistory: (state) => {
+      if (state.activeUser) {
+        state.activeUser.searchHistory = [];
+        const userIndex = state.users.findIndex(user => user.email === state.activeUser.email);
+        if (userIndex !== -1) {
+          state.users[userIndex] = state.activeUser;
+        }
+        localStorage.setItem('users', JSON.stringify(state.users));
+        localStorage.setItem('activeUser', JSON.stringify(state.activeUser));
+      }
     }
   },
 });
 
-export const { login, logout, restoreUser, addToWatchlist, removeFromWatchlist } = userSlice.actions;
+export const { login, logout, restoreUser, addToWatchlist, removeFromWatchlist, addSearchHistory, clearSearchHistory } = userSlice.actions;
 export const selectWatchlist = (state) => {
   return state.user.activeUser?.watchlist || [];
+};
+export const selectSearchHistory = (state) => {
+  return state.user.activeUser?.searchHistory || [];
 };
 export const loginUser = (email) => (dispatch) => {
   dispatch(login(email));

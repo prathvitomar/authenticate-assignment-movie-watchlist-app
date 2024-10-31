@@ -10,6 +10,7 @@ import MovieDetails from './components/MovieDetails/MovieDetails.jsx'
 import { Provider } from 'react-redux'
 import store from './app/store/store.js'
 import PrivateRoute from './features/ProtectedRoute/ProtectedRoute.jsx'
+import History from './pages/History/History.jsx'
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MovieDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'history',
+        element: (
+          <PrivateRoute>
+            <History />
           </PrivateRoute>
         ),
       },
