@@ -1,28 +1,24 @@
 import React, { useState } from "react";
-import "./Login.css";
+import "./Signup.css";
 import { loginUser } from "../../features/users/userSlice";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleLogin = (e) => {
+  const handleSignin = (e) => {
     e.preventDefault();
     if (email && password) {
-      dispatch(loginUser(email));
+      dispatch(loginUser(email, password));
       navigate("/home");
     } else {
-      alert("Please enter a valid email address");
+      alert("Please enter a valid email and password");
     }
   };
-
-  function navigateToSignup(){
-    navigate('/signup');
-  }
 
   return (
     <div
@@ -37,24 +33,21 @@ const Login = () => {
       }}
     >
       <div className="flex-col flex self-center text-black-300 mx-4">
-        <h1 className="my-3 font-bold text-5xl text-white-outline">Welcome Back.!!</h1>
+        <h1 className="my-3 font-bold text-5xl text-white-outline">Welcome</h1>
         <p className="pr-6 font-bold text-white text-black-outline opacity-95">
-          Cinema at Your Fingertips,Your Personal Movie Library Awaits You.
+          You took so long to find your favorite watchlist.
         </p>
       </div>
 
       <div className="flex justify-center self-center z-10 mx-4">
         <div className="p-12 bg-white mx-auto rounded-3xl w-96">
           <div className="mb-7">
-            <h3 className="font-semibold text-2xl text-gray-800">Log In</h3>
-            <p className="text-gray-400 mb-2">
-              Hurry up and Create your Watchlist.
-            </p>
-            <p onClick={navigateToSignup} className="text-purple-700 text-sm cursor-pointer">
-              Don't have account
+            <h3 className="font-semibold text-3xl text-gray-800">Sign In</h3>
+            <p className="text-gray-400">
+            I am really Disappointed that you don't have account yet
             </p>
           </div>
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleSignin}>
             <div className="space-y-6">
               <div>
                 <input
@@ -79,7 +72,7 @@ const Login = () => {
                   type="submit"
                   className="w-full flex justify-center bg-gray-800 hover:bg-purple-700 text-gray-100 p-3 rounded-lg tracking-wide font-semibold cursor-pointer transition ease-in duration-500"
                 >
-                  Log in
+                  Sign in
                 </button>
               </div>
             </div>
@@ -90,4 +83,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

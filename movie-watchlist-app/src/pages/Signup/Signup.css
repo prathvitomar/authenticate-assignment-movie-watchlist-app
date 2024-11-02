@@ -1,0 +1,100 @@
+Login.css
+
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .login-background {
+    background-image: url('../images/login-background-image.jpg');
+    background-size: cover;
+  }
+  
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+  
+  .login-card {
+    padding: 3rem;
+    background: white;
+    border-radius: 1.5rem;
+    width: 24rem; 
+  }
+  
+  .title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #4A5568; 
+  }
+  
+  .subtitle {
+    color: #A0AEC0;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #E2E8F0; 
+    border-radius: 0.5rem;
+    background: #EDF2F7; 
+    transition: background 0.2s ease-in-out;
+  }
+  
+  .input:focus {
+    background: #F7FAFC; 
+    border-color: #805AD5; 
+    outline: none;
+  }
+  
+  .button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: #805AD5; 
+    color: #F7FAFC;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background 0.5s ease-in-out;
+  }
+  
+  .button:hover {
+    background: #6B46C1; 
+  }
+  
+  .link {
+    color: #805AD5;
+  }
+  
+  .link:hover {
+    color: #6B46C1;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .block {
+    display: block;
+  }
+  
+
+  .text-white-outline {
+    text-shadow: 2px 2px 0px white;
+  }
+
+  .text-black-outline{
+    text-shadow: 2px 2px 0px black;
+    
+  }

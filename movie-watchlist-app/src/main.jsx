@@ -11,6 +11,7 @@ import { Provider } from 'react-redux'
 import store from './app/store/store.js'
 import PrivateRoute from './features/ProtectedRoute/ProtectedRoute.jsx'
 import History from './pages/History/History.jsx'
+import Signup from './pages/Signup/Signup.jsx'
 
 const router = createBrowserRouter([
   {
@@ -58,7 +59,11 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
-  }
+  },
+  {
+    path: '/signup',
+    element: <Signup />,
+  },
 ]);
 
 createRoot(document.getElementById('root')).render(
