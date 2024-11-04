@@ -4,9 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  // theme: {
-  //   extend: {},
-  // },
+  darkMode: "class",
   theme: {
     fontFamily: {
       rajdhani: ['Rajdhani', 'sans-serif'],

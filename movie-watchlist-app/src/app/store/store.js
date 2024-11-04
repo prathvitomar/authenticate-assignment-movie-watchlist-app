@@ -21,7 +21,7 @@ const store = configureStore({
           email: persistedEmail,
           isAuthenticated: !!persistedEmail,
         },
-      },
+    },   
 })
 
 export default store;

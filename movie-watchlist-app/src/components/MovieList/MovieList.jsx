@@ -61,7 +61,7 @@ function MovieList() {
     <>
       {movieStatus === "succeeded" && movies.Search ? (
         <>
-          <div className="movie-list">
+          <div className={`movie-list`}>
             {movies.Search && movies.Search.length > 0 ? (
               movies.Search.map((movie) => (
                 <div className="movie-card" key={movie.imdbID}>

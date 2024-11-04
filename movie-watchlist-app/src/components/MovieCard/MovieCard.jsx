@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import "./MovieCard.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,4 +60,4 @@ function MovieCard({ movie, onImageLoad }) {
   );
 }
 
-export default MovieCard;
+export default memo(MovieCard);
